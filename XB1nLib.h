@@ -2,8 +2,6 @@
 // Created by xia0 on 2019/11/7.
 //
 
-#ifndef XIL2CPPDUMPER_XIA0_BIN_LIB_H
-#define XIL2CPPDUMPER_XIA0_BIN_LIB_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,6 +41,3 @@ XRange* macho64_get_sec_range_by_name(struct mach_header_64* mh, const char* seg
 }
 #endif
 
-
-
-#endif //XIL2CPPDUMPER_XIA0_BIN_LIB_H

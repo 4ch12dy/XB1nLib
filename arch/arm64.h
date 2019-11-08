@@ -2,9 +2,6 @@
 // Created by xia0 on 2019/11/7.
 //
 
-#ifndef XIL2CPPDUMPER_ARM64_H
-#define XIL2CPPDUMPER_ARM64_H
-
 #include <stdint.h>
 #include <assert.h>
 #include <stddef.h>
@@ -45,5 +42,3 @@ extern "C"
 #ifdef __cplusplus
 }
 #endif
-
-#endif //XIL2CPPDUMPER_ARM64_H

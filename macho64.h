@@ -2,8 +2,6 @@
 // Created by xia0 on 2019/11/7.
 //
 
-#ifndef XIL2CPPDUMPER_MACHO64_H
-#define XIL2CPPDUMPER_MACHO64_H
 #include <stdint.h>
 
 #define MH_MAGIC_64 0xfeedfacf
@@ -58,4 +56,3 @@ struct section_64 { /* for 64-bit architectures */
     uint32_t    reserved2;  /* reserved (for count or sizeof) */
     uint32_t    reserved3;  /* reserved */
 };
-#endif //XIL2CPPDUMPER_MACHO64_H

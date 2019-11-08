@@ -2,7 +2,7 @@
 // Created by xia0 on 2019/11/7.
 //
 
-#include "xia0-bin-lib.h"
+#include "XB1nLib.h"
 
 char* hex_dump(void* target_addr, uint64_t size){
     uint64_t hex_buffer_size = size*3 + 1;
