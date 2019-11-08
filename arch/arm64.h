@@ -20,6 +20,7 @@ extern "C"
 
     // misc
     uint32_t bytes_2_uint32(uint8_t* bytes);
+    uint32_t arm64_insn_from_addr(void* addr);
 
     // add
     int arm64_is_add_imm(uint32_t insn);

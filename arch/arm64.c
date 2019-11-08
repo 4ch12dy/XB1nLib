@@ -12,6 +12,11 @@ uint32_t bytes_2_uint32(uint8_t* bytes){
     return value_uint32;
 }
 
+uint32_t arm64_insn_from_addr(void* addr){
+    uint32_t insn = *((uint32_t*)addr);
+    return insn;
+}
+
 // arm64 add
 /*   arm64 add imm
  *
