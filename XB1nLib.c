@@ -22,7 +22,7 @@ char* hex_dump(void* target_addr, uint64_t size){
 
 void show_hex_dump(void* target_addr, uint64_t size){
     char* hex_str = hex_dump(target_addr, size);
-    XILOG("%s", hex_str);
+    XILOG("%s\n", hex_str);
     free(hex_str);
 }
 
