@@ -1,2 +1,2 @@
 # XB1nLib
-xia0 binanry tools library
+xia0 binary tools library
