@@ -36,6 +36,12 @@ extern "C"
     int64_t arm64_adrp_decode_imm(uint32_t insn);
     void* arm64_adrp_decode(void* addr_pc, uint32_t insn);
 
+    // nop
+    int arm64_is_nop(uint32_t insn);
+
+    // mov
+    int arm64_is_movz(uint32_t insn);
+
     // ignore
     uint32_t make_insn_adrp(int rd, int imm);
     uint32_t make_insn_add_imm(uint32_t sf, uint32_t shift, uint32_t imm, uint32_t rn, uint32_t rd);
