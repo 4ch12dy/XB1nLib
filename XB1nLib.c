@@ -44,6 +44,8 @@ void* map_file_2_mem(const char* file_path){
     }
     len_file = st.st_size;
 
+    assert(len_file != 0);
+
     if ((p = mmap(NULL,len_file,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0)) == MAP_FAILED){
         XELOG("error in mmap");
         return NULL;
