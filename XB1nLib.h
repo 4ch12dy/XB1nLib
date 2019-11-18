@@ -15,6 +15,7 @@
 #include "xia0.h"
 #include "macho64.h"
 #include "arch/arm64.h"
+#include "exec_elf.h"
 
 
 typedef struct XRange
@@ -36,6 +37,8 @@ void show_hex_dump(void* target_addr, uint64_t size);
 void* map_file_2_mem(const char* file_path);
 
 XRange* macho64_get_sec_range_by_name(struct mach_header_64* mh, const char* seg_name, const char* sec_name);
+
+XRange* elf64_get_sec_range_by_name(Elf64_Ehdr* elfh, const char* sec_name);
 
 #ifdef __cplusplus
 }
