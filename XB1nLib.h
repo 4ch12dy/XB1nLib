@@ -17,7 +17,7 @@
 #include "arch/arm64.h"
 #include "exec_elf.h"
 
-
+#pragma once
 typedef struct XRange
 {
     uint64_t start;

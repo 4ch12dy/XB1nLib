@@ -41,6 +41,11 @@ extern "C"
 
     // mov
     int arm64_is_movz(uint32_t insn);
+    int arm64_is_movr(uint32_t insn);
+
+    //ldr
+    int arm64_is_ldr_imm(uint32_t insn);
+    int64_t arm64_ldr_decode_imm(uint32_t insn);
 
     // ignore
     uint32_t make_insn_adrp(int rd, int imm);

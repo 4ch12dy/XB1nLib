@@ -27,7 +27,7 @@ uint32_t arm64_insn_from_addr(void* addr){
 */
 
 int arm64_is_add_imm(uint32_t insn){
-    return (insn & 0xFF800000) == 0x91000000;
+    return (insn & 0x7F000000) == 0x11000000;
 }
 
 int64_t arm64_add_decode_imm(uint32_t insn){
@@ -131,7 +131,43 @@ int arm64_is_nop(uint32_t insn){
 int arm64_is_movz(uint32_t insn){
     return (insn & 0x7F800000) == 0x52800000;
 }
+// arm64 movr
+/*   mov <re> <re>
+ *
+ *  | 31  30 29  28      24 23 22  21  20        16 15         10 9         5|4    0|
+ *  +----+-----+-----------+-----+----+------------+-------------+-----------+------+
+ *  | sf | 0 1 | 0 1 0 1 0 | 0 0 | 0  |    Rm      | 0 0 0 0 0 0 | 1 1 1 1 1 |  Rd  |
+ *  +----+-----+-----------+-----+----+------------+-------------+-----------+------+
+ *         opc              shift   N                   imm6        Rn
+*/
 
+int arm64_is_movr(uint32_t insn){
+    return (insn & 0x7FE0FFE0) == 0x2A0003E0;
+}
+
+// arm64 ldr
+/*   ldr <re>, [<re>|<sp>]{<imm>} : unsigned offset
+ *
+ *  | 31 30 29   27  26   25 24 23 22  21                  10 9         5|4    0|
+ *  +------+-------+----+------+-----+-----------------------+-----------+------+
+ *  | 1  x | 1 1 1 | 0  |  0 1 | 0 1 |        imm12          | Rn        |  Rt  |
+ *  +------+-------+----+------+-----+-----------------------+-----------+------+
+ *    size                       opc
+*/
+
+int arm64_is_ldr_imm(uint32_t insn){
+    return (insn & 0xBFC00000) == 0xB9400000;
+}
+int64_t arm64_ldr_decode_imm(uint32_t insn){
+    assert(arm64_is_ldr_imm(insn));
+    const int mask12 = (1 << 12) -1;
+    const int mask2 = 3;
+
+    uint64_t imm = (insn >> 10) & mask12;
+    int scale = (insn >> 30) & mask2;
+
+    return imm << scale;
+}
 
 // encode
 uint32_t make_insn_adrp(int rd, int imm) {
