@@ -109,6 +109,29 @@ XRange* macho64_get_sec_range_by_name(struct mach_header_64* mh, const char* seg
     return the_segment;
 }
 
+XRange* elf32_get_sec_range_by_name(Elf32_Ehdr* elfh, const char* sec_name){
+    Elf32_Off shoff = elfh->e_shoff;
+    Elf32_Half shnum = elfh->e_shnum;
+    Elf32_Half shstrndx = elfh->e_shstrndx;
+    Elf32_Shdr* shdr = (Elf32_Shdr*)((uint8_t *)elfh + shoff);
+    Elf32_Shdr* strsh = shdr + shstrndx;
+
+    char* strtab = (char*)((uint8_t *)elfh + strsh->sh_offset);
+    XRange* the_range = malloc(sizeof(XRange));
+
+    for (int i = 0; i < shnum; ++i) {
+        Elf32_Shdr* cur_shdr = shdr + i;
+        Elf32_Half cur_sec_name_idx = cur_shdr->sh_name;
+        char* cur_sec_name = strtab+cur_sec_name_idx;
+        if (!strcmp(cur_sec_name, sec_name)) {
+            the_range->start = (uint64_t)((uint8_t *)elfh + cur_shdr->sh_offset);
+            the_range->end = the_range->start + cur_shdr->sh_size;
+            return the_range;
+        }
+    }
+    return NULL;
+}
+
 XRange* elf64_get_sec_range_by_name(Elf64_Ehdr* elfh, const char* sec_name){
     Elf64_Off shoff = elfh->e_shoff;
     Elf64_Quarter shnum = elfh->e_shnum;
